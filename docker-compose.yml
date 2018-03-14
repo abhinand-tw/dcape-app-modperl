@@ -1,0 +1,19 @@
+version: '2.1'
+
+services:
+
+  www:
+    image: ${IMAGE}:${IMAGE_VER}
+    restart: always
+    networks:
+      - lan
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:${APP_SITE}"
+    ports:
+      - "8080:8080"
+      - "8000:80"  
+networks:
+  lan:
+    external:
+      name: ${DCAPE_NET}
